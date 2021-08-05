@@ -153,6 +153,7 @@ public class CourseworkResit {
             System.out.println("Error: "+ e);
         }
         for (double num: allNums) {
+
             totalCost = totalCost + num;
         }
         return totalCost;
