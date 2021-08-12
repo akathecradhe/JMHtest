@@ -33,7 +33,7 @@ public class CourseworkResit {
         System.out.println(cw.getTotalCostOfOrdersDuring(Integer.parseInt(args[2]),args[0]));
         System.out.println();
         List<Map.Entry<String, Integer>> bottomItems = cw.getLeastPopularItems2(Integer.parseInt(args[3]),args[0]);
-        bottomItems.parallelStream().forEach(s -> System.out.println(s));
+        bottomItems.stream().forEach(s -> System.out.println(s));
        // System.out.println(bottomItems);
         //for (int i = 0; i < Integer.parseInt(args[3]); i++) {
         //    System.out.println(bottomItems[i]+",");
@@ -203,7 +203,8 @@ public class CourseworkResit {
         List lines = null;
         try {
             lines = Files.lines(Paths.get("data.csv"))
-                    .skip(1).collect(Collectors.toList());
+                    .skip(0).collect(Collectors.toList());
+            System.out.println(lines);
         }catch (Exception e){
 
             System.out.println("error reading file");
@@ -242,11 +243,9 @@ public class CourseworkResit {
                 //System.out.println("x"+listOfItems[x] +"  y"+ uniqueList.get(y));
             }
         }
-
-        //https://www.delftstack.com/howto/java/how-to-sort-a-map-by-value-in-java/#:~:text=500%202%3D1020-,Sort%20a%20Map%20Using%20sorted()%20Method,key%2C%20value%3E%20by%20values.
         List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue());
-        System.out.println(list.subList(0,n));
+        //System.out.println(list.subList(0,n));
 
         // return items;
 

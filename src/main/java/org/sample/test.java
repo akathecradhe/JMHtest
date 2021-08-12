@@ -26,37 +26,67 @@ public class test {
 
 
     public static void main(String[] args) throws IOException {
-        int n = 5;
+        int n = 12;
 
-        Map<String,Integer> output= new TreeMap<>();
-        ArrayList<String> itemList = new ArrayList<String>();
-        //
-        String line;
-        try (BufferedReader br = new BufferedReader(new FileReader("data.csv"))) {
-            int i = 0;
-            //skips first line
-            br.readLine();
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                itemList.add(data[1]);
-            }
-        }catch (IOException e) {
-            e.printStackTrace();
+        String[] items = new String[n];
+
+        List lines = null;
+        try {
+            lines = Files.lines(Paths.get("data.csv"))
+                    .skip(1).collect(Collectors.toList());
+            System.out.println(lines);
+        }catch (Exception e){
+
+            System.out.println("error reading file");
         }
 
-        HashSet<String> uniqueItemList = new HashSet(itemList);
 
-        Consumer<String> addConsumer = t -> output.put(t,Collections.frequency(itemList,t));
+        List<String> matchingName= Stream.of(lines.toString().split(","))
+                .collect(Collectors.toList());
+        Integer counter= 1;
+        Integer i = 0;
 
-        uniqueItemList.parallelStream().forEach(addConsumer);
+        //change datastructure to ArrayList
+        String[] listOfItems = new String[999];
+        //System.out.println(matchingName.get(4996));
+        for (String line : matchingName) {
+            if (counter<5008 & i < 999) {
+                listOfItems[i] = matchingName.get(counter);
+                counter += 5;
+                i+=1;
 
-        //output.forEach((key, value) -> System.out.println(key + " : " + value));
-        List<Map.Entry<String,Integer>> sorted = output.entrySet().parallelStream().sorted(Map.Entry.comparingByValue()).limit(n).
-                collect(Collectors.toList());
+            }
+            //System.out.println(Arrays.toString(listOfItems));
+        }
 
 
+        //System.out.println(Arrays.toString(listOfItems));
+        List uniqueList = Arrays.stream(listOfItems)
+                .distinct().collect(Collectors.toList());
 
-        System.out.println(getTotal(2,"data.csv"));
+        System.out.println("uni "+uniqueList);
+        Map<String, Integer> map = new TreeMap<>();
+        for (Object x: uniqueList) {
+            map.put(x.toString(),0);
+        }
+        for (int x =0 ; x<=  listOfItems.length-1; x++){
+            for(int y=0 ; y <= uniqueList.size()-1;y++){
+                if(listOfItems[x].equals(uniqueList.get(y))){
+                    map.put(uniqueList.get(y).toString(), map.get(uniqueList.get(y)) + 1);
+                    //System.out.println("x"+listOfItems[x] +"  y"+ uniqueList.get(y));
+                }
+
+            }
+        }
+
+        //https://www.delftstack.com/howto/java/how-to-sort-a-map-by-value-in-java/#:~:text=500%202%3D1020-,Sort%20a%20Map%20Using%20sorted()%20Method,key%2C%20value%3E%20by%20values.
+        List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+        System.out.println("sublist:  "+list.subList(0,n));
+
+        // return items;
+
+      //  System.out.println(getTotal(2,"data.csv"));
 
 
         //sorted.stream().forEach(s -> System.out.println(s));
