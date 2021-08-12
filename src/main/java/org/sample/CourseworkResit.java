@@ -32,12 +32,12 @@ public class CourseworkResit {
         System.out.println();
         System.out.println(cw.getTotalCostOfOrdersDuring(Integer.parseInt(args[2]),args[0]));
         System.out.println();
-        List<Map.Entry<String, Integer>> bottomItems = cw.getLeastPopularItems2(Integer.parseInt(args[3]),args[0]);
-        bottomItems.parallelStream().forEach(s -> System.out.println(s));
+        List<Map.Entry<String, Integer>> bottomItems = cw.getLeastPopularItems(Integer.parseInt(args[3]),args[0]);
+        //bottomItems.parallelStream().forEach(s -> System.out.println(s));
        // System.out.println(bottomItems);
         //for (int i = 0; i < Integer.parseInt(args[3]); i++) {
-        //    System.out.println(bottomItems[i]+",");
-        //}
+           System.out.println(bottomItems +",");
+       // }
         System.out.println();
     }
 
