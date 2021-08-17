@@ -46,14 +46,14 @@ import java.util.stream.Collectors;
 
 
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 7, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
-@Fork(1)
+@Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
+@Fork(2)
 
 @State(Scope.Benchmark)
 public class MyBenchmark {
-    String filename = "data.csv";
+
     @Param({"5", "30","60","125","250","500","750", "1000"})
     public int id;
 
@@ -75,7 +75,7 @@ public class MyBenchmark {
     }
 
 
-    //@Benchmark
+    @Benchmark
     public void getOrder2(Blackhole bh){
         CourseworkResit file =  new CourseworkResit(nameOFfile);
 
@@ -83,7 +83,7 @@ public class MyBenchmark {
 
     }
 
-    //@Benchmark
+    @Benchmark
     public void getOrder3(Blackhole bh){
 
         CourseworkResit file =  new CourseworkResit(nameOFfile);

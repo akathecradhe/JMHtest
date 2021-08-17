@@ -204,7 +204,7 @@ public class CourseworkResit {
         try {
             lines = Files.lines(Paths.get("data.csv"))
                     .skip(0).collect(Collectors.toList());
-            System.out.println(lines);
+           // System.out.println(lines);
         }catch (Exception e){
 
             System.out.println("error reading file");
@@ -218,10 +218,11 @@ public class CourseworkResit {
 
         //change datastructure to ArrayList
         String[] listOfItems = new String[999];
-        System.out.println(matchingName.get(4996));
+        //System.out.println(matchingName.get(4996));
         for (String line : matchingName) {
             if (counter<4997 & i < 999) {
                 listOfItems[i] = matchingName.get(counter);
+
                 counter += 5;
                 i+=1;
 

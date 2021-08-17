@@ -46,17 +46,17 @@ import java.util.stream.Stream;
 
 
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 7, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
 
 @State(Scope.Benchmark)
 public class MyBenchmark2 {
-    String filename = "data.csv";
+
 
     @Param({"1","4","6","12","10"})
-    public String id;
+    public String month;
 
     String nameOFfile = "src/main/java/org/sample/data.csv";
 
@@ -84,23 +84,23 @@ public class MyBenchmark2 {
     public void getTotalCostOfOrdersDuring(Blackhole bh){
         CourseworkResit file =  new CourseworkResit(nameOFfile);
 
-        bh.consume(file.getTotalCostOfOrdersDuring(Integer.parseInt(id), nameOFfile));
+        bh.consume(file.getTotalCostOfOrdersDuring(Integer.parseInt(month), nameOFfile));
 
     }
 
-   // @Benchmark
+    @Benchmark
     public void getTotalCostOfOrdersDuring2(Blackhole bh){
         CourseworkResit file =  new CourseworkResit(nameOFfile);
 
-        bh.consume(file.getTotalCostOfOrdersDuring2(Integer.parseInt(id), nameOFfile));
+        bh.consume(file.getTotalCostOfOrdersDuring2(Integer.parseInt(month), nameOFfile));
     }
 
-    // @Benchmark
+      @Benchmark
     public void getTotalCostOfOrdersDuring3(Blackhole bh){
 
         CourseworkResit file =  new CourseworkResit(nameOFfile);
 
-        bh.consume(file.getTotalCostOfOrdersDuring3(Integer.parseInt(id), nameOFfile));
+        bh.consume(file.getTotalCostOfOrdersDuring3(Integer.parseInt(month), nameOFfile));
 
     }
 

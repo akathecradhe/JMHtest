@@ -49,14 +49,14 @@ import java.util.stream.Stream;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 7, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
 
 @State(Scope.Benchmark)
 public class MyBenchmark3 {
 
 
-    @Param({"1","4","6","12","10"})
+    @Param({"1","5","9","13","17","20"})
     public String p;
 
     String nameOFfile = "src/main/java/org/sample/data.csv";
@@ -95,7 +95,7 @@ public class MyBenchmark3 {
     public void getLeastPopularItems2(Blackhole bh){
         CourseworkResit file =  new CourseworkResit(nameOFfile);
 
-        bh.consume(file.getTotalCostOfOrdersDuring2(Integer.parseInt(p), nameOFfile));
+        bh.consume(file.getLeastPopularItems2(Integer.parseInt(p), nameOFfile));
     }
 
 
