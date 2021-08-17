@@ -44,7 +44,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 7, time = 1, timeUnit = TimeUnit.SECONDS)
@@ -75,7 +74,7 @@ public class MyBenchmark {
     }
 
 
-    //@Benchmark
+    @Benchmark
     public void getOrder2(Blackhole bh){
         CourseworkResit file =  new CourseworkResit(nameOFfile);
 
@@ -83,7 +82,7 @@ public class MyBenchmark {
 
     }
 
-    //@Benchmark
+    @Benchmark
     public void getOrder3(Blackhole bh){
 
         CourseworkResit file =  new CourseworkResit(nameOFfile);

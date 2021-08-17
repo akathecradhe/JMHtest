@@ -56,7 +56,7 @@ import java.util.stream.Stream;
 public class MyBenchmark3 {
 
 
-    @Param({"1","4","6","12","10"})
+    @Param({"1","5","9","13","17","20"})
     public String p;
 
     String nameOFfile = "src/main/java/org/sample/data.csv";
